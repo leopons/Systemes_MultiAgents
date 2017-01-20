@@ -6,21 +6,23 @@ import philosophes.actions.*;
 
 public class Philosophe extends Agent {
 
+	protected Table tab;
+	protected int ID;
 	protected boolean fg;
 	protected boolean fd;
 	protected Etat etat;
 	protected int faim;
 	protected int pensee;
-	protected int ID;
 	protected int seuilFaim;
 	protected int deltaFPenser;
 	protected int deltaFManger;
 
-	public Philosophe(Environnement env, int seuilFaim, int deltaFPenser, int deltaFManger, int ID){
-		this.env = env;
+	public Philosophe(Table tab, int seuilFaim, int deltaFPenser, int deltaFManger, int ID){
+		
+		this.tab = tab;
 		this.ID = ID;
-		this.fg = true;
-		this.fd = true;
+		this.fg = false;
+		this.fd = false;
 		this.etat = Etat.en_train_penser;
 		this.faim = -10;
 		this.pensee = 0;
@@ -32,8 +34,45 @@ public class Philosophe extends Agent {
 		// LISTE DES ACTIONS POSSIBLES POUR CET AGENT :
 		listeActions.add(new Penser());
 		listeActions.add(new FinirPenser());
+		listeActions.add(new PrendreFourchettes());
 		//
 		this.actions = listeActions;
+		
+	}
+
+	public boolean regarderGauche(){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		return fourch.getDispo(this.ID);
+	}
+	
+	public boolean regarderDroite(){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		return fourch.getDispo((this.ID+1) % (this.tab.getEffectif()));
+	}
+	
+	public void prendreGauche(){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		fourch.setDispo(this.ID, false);
+		this.fg = true;
+	}
+	
+	public void prendreDroite(){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		fourch.setDispo((this.ID+1) % (this.tab.getEffectif()), false);
+		this.fd = true;
+	}
+	
+	public void poser(int i){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		fourch.setDispo(i, true);
+	}
+
+	public Table getTab() {
+		return tab;
+	}
+
+	public void setTab(Table tab) {
+		this.tab = tab;
 	}
 
 	public boolean isFg() {

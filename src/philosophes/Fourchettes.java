@@ -8,6 +8,10 @@ public class Fourchettes extends Donnee {
 		return disponibles[i];
 	}
 	
+	public void setDispo(int i, boolean b){
+		disponibles[i] = b;
+	}
+	
 	public Fourchettes(int effectif){
 		boolean disponibles[] = new boolean[effectif];
 		for (int i = 0; i<effectif; i++){

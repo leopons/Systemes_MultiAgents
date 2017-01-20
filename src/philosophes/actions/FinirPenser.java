@@ -7,7 +7,8 @@ public class FinirPenser extends Action {
 	public boolean check_conditions(Agent agent) {
 		Philosophe phil = (Philosophe) agent;
 		// CONDITIONS :
-		return ((phil.getEtat() == Etat.en_train_penser) && (phil.getFaim()>=phil.getSeuilFaim()) );
+		return ((phil.getEtat() == Etat.en_train_penser) 
+				&& (phil.getFaim()>=phil.getSeuilFaim()) );
 	}
 
 	public void effectuer(Agent agent) {
