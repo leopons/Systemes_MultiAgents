@@ -39,6 +39,10 @@ public class Philosophe extends Agent {
 		listeActions.add(new Penser());
 		listeActions.add(new FinirPenser());
 		listeActions.add(new PrendreFourchettes());
+		listeActions.add(new CommencerManger());
+		listeActions.add(new Manger());
+		listeActions.add(new FinirManger());
+		listeActions.add(new Famine());
 		//
 		this.actions = listeActions;
 		
