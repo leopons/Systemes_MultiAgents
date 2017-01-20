@@ -19,6 +19,7 @@ public class FinirManger extends Action {
 		phil.poserGauche();
 		phil.poserDroite();
 		System.out.println("Le philosophe #" + phil.getID() + " a fini de manger.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

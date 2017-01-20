@@ -19,6 +19,7 @@ public class PrendreFourchettes extends Action {
 		phil.prendreGauche();
 		phil.prendreDroite();
 		System.out.println("Le philosophe #" + phil.getID() + " prend les fourchettes.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

@@ -17,6 +17,7 @@ public class Penser extends Action {
 		phil.setPensee(phil.getPensee()+1);
 		phil.setFaim(phil.getFaim()+phil.getDeltaFPenser());
 		System.out.println("Le philosophe #" + phil.getID() + " pense.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

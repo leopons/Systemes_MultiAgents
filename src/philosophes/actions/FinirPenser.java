@@ -16,6 +16,7 @@ public class FinirPenser extends Action {
 		// CONSEQUENCES :
 		phil.setEtat(Etat.en_attente_fourchettes);
 		System.out.println("Le philosophe #" + phil.getID() + " passe en attente des fourchettes.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

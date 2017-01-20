@@ -17,6 +17,7 @@ public class CommencerManger extends Action {
 		// CONSEQUENCES :
 		phil.setEtat(Etat.en_train_manger);
 		System.out.println("Le philosophe #" + phil.getID() + " commence à manger.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }
