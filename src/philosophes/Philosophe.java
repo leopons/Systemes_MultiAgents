@@ -66,6 +66,16 @@ public class Philosophe extends Agent {
 		this.fd = true;
 	}
 	
+	public void poserGauche(){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		fourch.setDispo(this.ID, true);
+	}
+	
+	public void poserDroite(){
+		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		fourch.setDispo((this.ID+1) % (this.tab.getEffectif()), true);
+	}
+	
 	public void poser(int i){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(i, true);
