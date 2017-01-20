@@ -13,11 +13,13 @@ public class Philosophe extends Agent {
 	protected Etat etat;
 	protected int faim;
 	protected int pensee;
+	protected int famine;
 	protected int seuilFaim;
 	protected int deltaFPenser;
 	protected int deltaFManger;
+	protected int deltaFFamine;
 
-	public Philosophe(Table tab, int seuilFaim, int deltaFPenser, int deltaFManger, int ID){
+	public Philosophe(Table tab, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine, int ID){
 		
 		this.tab = tab;
 		this.ID = ID;
@@ -26,9 +28,11 @@ public class Philosophe extends Agent {
 		this.etat = Etat.en_train_penser;
 		this.faim = -10;
 		this.pensee = 0;
+		this.famine = 0;
 		this.seuilFaim = seuilFaim;
 		this.deltaFPenser = deltaFPenser;
 		this.deltaFManger = deltaFManger;
+		this.deltaFFamine = deltaFFamine;
 		
 		ArrayList<Action> listeActions = new ArrayList<Action>();
 		// LISTE DES ACTIONS POSSIBLES POUR CET AGENT :
@@ -65,6 +69,22 @@ public class Philosophe extends Agent {
 	public void poser(int i){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(i, true);
+	}
+	
+	public int getFamine() {
+		return famine;
+	}
+
+	public void setFamine(int famine) {
+		this.famine = famine;
+	}
+
+	public int getDeltaFFamine() {
+		return deltaFFamine;
+	}
+
+	public void setDeltaFFamine(int deltaFFamine) {
+		this.deltaFFamine = deltaFFamine;
 	}
 
 	public Table getTab() {

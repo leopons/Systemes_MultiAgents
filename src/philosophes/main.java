@@ -4,7 +4,7 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		Table tab = new Table(10, 0, 10, -1); 	// effectif, seuilFaim, deltaPenser, deltaManger
+		Table tab = new Table(10, 0, 5, -2, 1); 	// effectif, seuilFaim, deltaPenser, deltaManger, deltaFamine
 		tab.run();
 
 	}

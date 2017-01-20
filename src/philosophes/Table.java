@@ -10,7 +10,7 @@ public class Table extends Environnement {
 	protected int deltaFPenser;
 	protected int deltaFManger;
 	
-	public Table(int effectif, int seuilFaim, int deltaFPenser, int deltaFManger){
+	public Table(int effectif, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine){
 		
 		this.effectif = effectif;
 		this.seuilFaim = seuilFaim;
@@ -19,7 +19,7 @@ public class Table extends Environnement {
 		
 		ArrayList<Agent> listeAgents = new ArrayList<Agent>();
 		for (int i = 0; i < effectif; i++){
-			listeAgents.add(new Philosophe(this, seuilFaim, deltaFPenser, deltaFManger, i));
+			listeAgents.add(new Philosophe(this, seuilFaim, deltaFPenser, deltaFManger, deltaFFamine, i));
 		}
 		this.agents = listeAgents;
 		
