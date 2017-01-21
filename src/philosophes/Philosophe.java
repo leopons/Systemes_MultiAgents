@@ -8,8 +8,7 @@ public class Philosophe extends Agent {
 
 	protected Table tab;
 	protected int ID;
-	protected boolean fg;
-	protected boolean fd;
+	protected boolean fourchettes;
 	protected Etat etat;
 	protected int faim;
 	protected int pensee;
@@ -23,8 +22,7 @@ public class Philosophe extends Agent {
 		
 		this.tab = tab;
 		this.ID = ID;
-		this.fg = false;
-		this.fd = false;
+		this.fourchettes = false;
 		this.etat = Etat.en_train_penser;
 		this.faim = -10;
 		this.pensee = 0;
@@ -60,17 +58,15 @@ public class Philosophe extends Agent {
 	public void prendreFourchettes(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(this.ID, false);
-		this.fg = true;
 		fourch.setDispo((this.ID+1) % (this.tab.getEffectif()), false);
-		this.fd = true;
+		this.fourchettes = true;
 	}
 	
 	public void poserFourchettes(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(this.ID, true);
-		this.fg = false;
 		fourch.setDispo((this.ID+1) % (this.tab.getEffectif()), true);
-		this.fd = false;
+		this.fourchettes = false;
 	}
 	
 	public void poser(int i){
@@ -102,20 +98,8 @@ public class Philosophe extends Agent {
 		this.tab = tab;
 	}
 
-	public boolean isFg() {
-		return fg;
-	}
-
-	public void setFg(boolean fg) {
-		this.fg = fg;
-	}
-
-	public boolean isFd() {
-		return fd;
-	}
-
-	public void setFd(boolean fd) {
-		this.fd = fd;
+	public boolean aLesFourchettes() {
+		return fourchettes;
 	}
 
 	public Etat getEtat() {

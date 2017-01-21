@@ -9,7 +9,7 @@ public class Famine extends Action {
 		// CONDITIONS :
 		return ((phil.getEtat() == Etat.en_attente_fourchettes) 
 				&& !(phil.regarderDroite() && phil.regarderGauche())
-				&& !(phil.isFd() && phil.isFg()) );
+				&& !(phil.aLesFourchettes()) );
 	}
 
 	public void effectuer(Agent agent) {

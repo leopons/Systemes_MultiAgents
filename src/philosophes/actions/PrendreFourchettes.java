@@ -8,7 +8,7 @@ public class PrendreFourchettes extends Action {
 		Philosophe phil = (Philosophe) agent;
 		// CONDITIONS :
 		return ((phil.getEtat() == Etat.en_attente_fourchettes) 
-				&& !(phil.isFd() || phil.isFg()) 
+				&& !(phil.aLesFourchettes())
 				&& (phil.regarderGauche()) 
 				&& (phil.regarderDroite()));
 	}
