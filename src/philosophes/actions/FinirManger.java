@@ -16,8 +16,7 @@ public class FinirManger extends Action {
 		Philosophe phil = (Philosophe) agent;
 		// CONSEQUENCES :
 		phil.setEtat(Etat.en_train_penser);
-		phil.poserGauche();
-		phil.poserDroite();
+		phil.poserFourchettes();
 		System.out.println("Le philosophe #" + phil.getID() + " a fini de manger.");
 	}
 

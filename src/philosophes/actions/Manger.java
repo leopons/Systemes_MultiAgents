@@ -8,7 +8,7 @@ public class Manger extends Action {
 		Philosophe phil = (Philosophe) agent;
 		// CONDITIONS :
 		return ((phil.getEtat() == Etat.en_train_manger) 
-				&& (phil.getFaim()>phil.getSeuilFaim()) );
+				&& (phil.getFaim() > 0 ));
 	}
 
 	public void effectuer(Agent agent) {

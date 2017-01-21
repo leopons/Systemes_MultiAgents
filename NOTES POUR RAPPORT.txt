@@ -1,0 +1,6 @@
+NOTES POUR RAPPORT
+
+Choix : 
+- suppression de "Commencer manger" qui peut clairement s'intégrer à "Prendre fourchettes"
+- regroupement de prendre, poser, et des attributs fg et fd : le philosophe ne prendra les fourchettes que si les deux sont disponibles (sinon ça sert à rien)
+

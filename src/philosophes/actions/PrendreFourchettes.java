@@ -16,8 +16,8 @@ public class PrendreFourchettes extends Action {
 	public void effectuer(Agent agent) {
 		Philosophe phil = (Philosophe) agent;
 		// CONSEQUENCES :
-		phil.prendreGauche();
-		phil.prendreDroite();
+		phil.prendreFourchettes();
+		phil.setEtat(Etat.en_train_manger);
 		System.out.println("Le philosophe #" + phil.getID() + " prend les fourchettes.");
 	}
 

@@ -39,7 +39,6 @@ public class Philosophe extends Agent {
 		listeActions.add(new Penser());
 		listeActions.add(new FinirPenser());
 		listeActions.add(new PrendreFourchettes());
-		listeActions.add(new CommencerManger());
 		listeActions.add(new Manger());
 		listeActions.add(new FinirManger());
 		listeActions.add(new Famine());
@@ -58,26 +57,20 @@ public class Philosophe extends Agent {
 		return fourch.getDispo((this.ID+1) % (this.tab.getEffectif()));
 	}
 	
-	public void prendreGauche(){
+	public void prendreFourchettes(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(this.ID, false);
 		this.fg = true;
-	}
-	
-	public void prendreDroite(){
-		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo((this.ID+1) % (this.tab.getEffectif()), false);
 		this.fd = true;
 	}
 	
-	public void poserGauche(){
+	public void poserFourchettes(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(this.ID, true);
-	}
-	
-	public void poserDroite(){
-		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
+		this.fg = false;
 		fourch.setDispo((this.ID+1) % (this.tab.getEffectif()), true);
+		this.fd = false;
 	}
 	
 	public void poser(int i){

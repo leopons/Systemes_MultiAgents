@@ -8,7 +8,7 @@ public class FinirPenser extends Action {
 		Philosophe phil = (Philosophe) agent;
 		// CONDITIONS :
 		return ((phil.getEtat() == Etat.en_train_penser) 
-				&& (phil.getFaim()>=phil.getSeuilFaim()) );
+				&& (phil.getFaim() >= phil.getSeuilFaim()) );
 	}
 
 	public void effectuer(Agent agent) {
