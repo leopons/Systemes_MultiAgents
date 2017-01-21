@@ -13,12 +13,8 @@ public class Philosophe extends Agent {
 	protected int faim;
 	protected int pensee;
 	protected int famine;
-	protected int seuilFaim;
-	protected int deltaFPenser;
-	protected int deltaFManger;
-	protected int deltaFFamine;
 
-	public Philosophe(Table tab, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine, int ID){
+	public Philosophe(Table tab, int ID){
 		
 		this.tab = tab;
 		this.ID = ID;
@@ -27,10 +23,6 @@ public class Philosophe extends Agent {
 		this.faim = -10;
 		this.pensee = 0;
 		this.famine = 0;
-		this.seuilFaim = seuilFaim;
-		this.deltaFPenser = deltaFPenser;
-		this.deltaFManger = deltaFManger;
-		this.deltaFFamine = deltaFFamine;
 		
 		ArrayList<Action> listeActions = new ArrayList<Action>();
 		// LISTE DES ACTIONS POSSIBLES POUR CET AGENT :
@@ -73,22 +65,6 @@ public class Philosophe extends Agent {
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(i, true);
 	}
-	
-	public int getFamine() {
-		return famine;
-	}
-
-	public void setFamine(int famine) {
-		this.famine = famine;
-	}
-
-	public int getDeltaFFamine() {
-		return deltaFFamine;
-	}
-
-	public void setDeltaFFamine(int deltaFFamine) {
-		this.deltaFFamine = deltaFFamine;
-	}
 
 	public Table getTab() {
 		return tab;
@@ -125,6 +101,14 @@ public class Philosophe extends Agent {
 	public void setPensee(int pensee) {
 		this.pensee = pensee;
 	}
+		
+	public int getFamine() {
+		return famine;
+	}
+
+	public void setFamine(int famine) {
+		this.famine = famine;
+	}
 	
 	public int getID() {
 		return ID;
@@ -135,29 +119,20 @@ public class Philosophe extends Agent {
 	}
 
 	public int getSeuilFaim() {
-		return seuilFaim;
-	}
-
-	public void setSeuilFaim(int seuilFaim) {
-		this.seuilFaim = seuilFaim;
+		return tab.getSeuilFaim();
 	}
 
 	public int getDeltaFPenser() {
-		return deltaFPenser;
-	}
-
-	public void setDeltaFPenser(int deltaFPenser) {
-		this.deltaFPenser = deltaFPenser;
+		return tab.getDeltaFPenser();
 	}
 
 	public int getDeltaFManger() {
-		return deltaFManger;
+		return tab.getDeltaFManger();
 	}
-
-	public void setDeltaFManger(int deltaFManger) {
-		this.deltaFManger = deltaFManger;
+	
+	public int getDeltaFFamine() {
+		return tab.getDeltaFFamine();
 	}
-
 	
 	
 	

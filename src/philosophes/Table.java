@@ -9,6 +9,7 @@ public class Table extends Environnement {
 	protected int seuilFaim;
 	protected int deltaFPenser;
 	protected int deltaFManger;
+	protected int deltaFFamine;
 	
 	public Table(int effectif, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine){
 		
@@ -16,10 +17,11 @@ public class Table extends Environnement {
 		this.seuilFaim = seuilFaim;
 		this.deltaFPenser = deltaFPenser;
 		this.deltaFManger = deltaFManger;
+		this.deltaFFamine = deltaFFamine;
 		
 		ArrayList<Agent> listeAgents = new ArrayList<Agent>();
 		for (int i = 0; i < effectif; i++){
-			listeAgents.add(new Philosophe(this, seuilFaim, deltaFPenser, deltaFManger, deltaFFamine, i));
+			listeAgents.add(new Philosophe(this, i));
 		}
 		this.agents = listeAgents;
 		
@@ -30,6 +32,26 @@ public class Table extends Environnement {
 	}
 
 	
+	public int getSeuilFaim() {
+		return seuilFaim;
+	}
+
+
+	public int getDeltaFPenser() {
+		return deltaFPenser;
+	}
+
+
+	public int getDeltaFManger() {
+		return deltaFManger;
+	}
+
+
+	public int getDeltaFFamine() {
+		return deltaFFamine;
+	}
+
+
 	public int getEffectif(){
 		return effectif;
 	}
