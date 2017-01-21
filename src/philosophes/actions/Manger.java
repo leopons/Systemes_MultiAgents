@@ -16,6 +16,7 @@ public class Manger extends Action {
 		// CONSEQUENCES :
 		phil.setFaim(phil.getFaim()+phil.getDeltaFManger());
 		System.out.println("Le philosophe #" + phil.getID() + " mange.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

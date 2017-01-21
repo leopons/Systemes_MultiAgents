@@ -18,6 +18,7 @@ public class FinirManger extends Action {
 		phil.setEtat(Etat.en_train_penser);
 		phil.poserFourchettes();
 		System.out.println("Le philosophe #" + phil.getID() + " a fini de manger.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

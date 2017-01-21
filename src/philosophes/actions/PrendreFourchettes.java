@@ -19,6 +19,7 @@ public class PrendreFourchettes extends Action {
 		phil.prendreFourchettes();
 		phil.setEtat(Etat.en_train_manger);
 		System.out.println("Le philosophe #" + phil.getID() + " prend les fourchettes.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }

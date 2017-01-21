@@ -18,6 +18,7 @@ public class Famine extends Action {
 		phil.setFaim(phil.getFaim()+phil.getDeltaFFamine());
 		phil.setFamine(phil.getFamine()+1);
 		System.out.println("Le philosophe #" + phil.getID() + " est en famine.");
+		System.out.println("Faim : " + phil.getFaim());
 	}
 
 }
