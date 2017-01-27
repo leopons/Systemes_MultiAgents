@@ -10,6 +10,8 @@ public class Table extends Environnement {
 	protected int deltaFPenser;
 	protected int deltaFManger;
 	protected int deltaFFamine;
+	protected int compteurFamine;
+	protected int compteurPensee;
 	
 	public Table(int effectif, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine){
 		
@@ -31,6 +33,9 @@ public class Table extends Environnement {
 		
 	}
 
+	public void bilan(){
+		System.out.println("BILAN : Famine Totale = " + compteurFamine + ", Pensée Totale = " + compteurPensee);
+	}
 	
 	public int getSeuilFaim() {
 		return seuilFaim;
@@ -55,5 +60,22 @@ public class Table extends Environnement {
 	public int getEffectif(){
 		return effectif;
 	}
+
+	public int getCompteurFamine() {
+		return compteurFamine;
+	}
+
+	public void setCompteurFamine(int compteurFamine) {
+		this.compteurFamine = compteurFamine;
+	}
+
+	public int getCompteurPensee() {
+		return compteurPensee;
+	}
+
+	public void setCompteurPensee(int compteurPensee) {
+		this.compteurPensee = compteurPensee;
+	}
+
 	
 }

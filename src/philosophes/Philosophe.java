@@ -65,6 +65,16 @@ public class Philosophe extends Agent {
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		fourch.setDispo(i, true);
 	}
+	
+	public void incrementFamine(){
+		this.famine ++;
+		tab.setCompteurFamine(tab.getCompteurFamine()+1);
+	}
+	
+	public void incrementPensee(){
+		this.pensee ++;
+		tab.setCompteurPensee(tab.getCompteurPensee()+1);
+	}
 
 	public Table getTab() {
 		return tab;
