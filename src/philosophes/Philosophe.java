@@ -7,7 +7,6 @@ import philosophes.actions.*;
 public class Philosophe extends Agent {
 
 	protected Table tab;
-	protected int ID;
 	protected boolean fourchettes;
 	protected Etat etat;
 	protected int faim;
@@ -23,6 +22,7 @@ public class Philosophe extends Agent {
 		this.faim = -10;
 		this.pensee = 0;
 		this.famine = 0;
+		this.BAL = new ArrayList<Message>();
 		
 		ArrayList<Action> listeActions = new ArrayList<Action>();
 		// LISTE DES ACTIONS POSSIBLES POUR CET AGENT :
@@ -49,6 +49,18 @@ public class Philosophe extends Agent {
 	public boolean regarderDroite(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		return fourch.getDispo((this.ID+1) % (this.tab.getEffectif()));
+	}
+	
+	// Retourne le contenu du premier message de la boite aux lettres.
+	// En effet, au vu des messages de notre système, on considère que le philosophe ne lit qu'un seul message,
+	// le dernier qu'il a reçu, et qu'il n'a pas besoin de connaitre le destinataire de celui-ci.
+	public String contenuMess(){
+		if (BAL.isEmpty()) {
+			return "";
+		}
+		else {
+			return BAL.get(BAL.size()-1).getContenu();
+		}
 	}
 	
 	// Prend les fourchettes
