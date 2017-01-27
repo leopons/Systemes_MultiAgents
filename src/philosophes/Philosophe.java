@@ -31,6 +31,7 @@ public class Philosophe extends Agent {
 		listeActions.add(new PrendreFourchettes());
 		listeActions.add(new Manger());
 		listeActions.add(new FinirManger());
+		listeActions.add(new Faim());
 		listeActions.add(new Famine());
 		//
 		this.actions = listeActions;
@@ -61,6 +62,18 @@ public class Philosophe extends Agent {
 		else {
 			return BAL.get(BAL.size()-1).getContenu();
 		}
+	}
+	
+	// Envoie un message aux deux voisins leur demandant leurs fourchettes (cas de Famine)
+	
+	public void demanderVoisinsFourchettes(){
+		Message mess1 = new Message((this.ID+1) % (this.tab.getEffectif()), this.ID, "Help");
+		tab.send(mess1);
+		
+		// je rajoute l'effectif total à ID-1 car dans le cas ID=0 java n'aime pas faire du modulo
+		// sur des nombres négatifs. (et ça ne change rien au résultat)
+		Message mess2 = new Message((this.ID-1+this.tab.getEffectif()) % (this.tab.getEffectif()), this.ID, "Help");
+		tab.send(mess2);
 	}
 	
 	// Prend les fourchettes
@@ -137,6 +150,12 @@ public class Philosophe extends Agent {
 		return tab.getSeuilFaim();
 	}
 	
+	// Récupère le seuil de famine du système
+	
+	public int getSeuilFamine() {
+		return tab.getSeuilFamine();
+	}
+	
 	// Récupère le delta faim en train de penser
 
 	public int getDeltaFPenser() {
@@ -151,8 +170,8 @@ public class Philosophe extends Agent {
 	
 	// Récupère le delta faim en famine
 	
-	public int getDeltaFFamine() {
-		return tab.getDeltaFFamine();
+	public int getDeltaFFaim() {
+		return tab.getDeltaFFaim();
 	}
 	
 	

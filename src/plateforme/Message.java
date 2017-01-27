@@ -1,6 +1,6 @@
 package plateforme;
 
-public abstract class Message {
+public class Message {
 
 	// Les messages sont créés par les agents au cours de certaines actions (dépend du système), 
 	// puis envoyés à leur destinataire via l'environnement (méthode send).
