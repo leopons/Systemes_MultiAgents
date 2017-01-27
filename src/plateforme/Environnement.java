@@ -63,4 +63,14 @@ public abstract class Environnement {
 
 	public abstract void bilan() throws IOException;
 
+
+	
+	// Un agent peut envoyer des messages aux autres agents.
+	// Pour cela, il en informe l'environnement en appelant send(message), 
+	// et l'environnement rajoute le message dans la BAL du destinataire.
+	
+	public void send(Message m){
+		agents.get(m.getDestinataireID()).BAL.add(m);
+	}
+	
 }

@@ -7,7 +7,6 @@ import philosophes.actions.*;
 public class Philosophe extends Agent {
 
 	protected Table tab;
-	protected int ID;
 	protected boolean fourchettes;
 	protected Etat etat;
 	protected int faim;
@@ -23,6 +22,7 @@ public class Philosophe extends Agent {
 		this.faim = -10;
 		this.pensee = 0;
 		this.famine = 0;
+		this.BAL = new ArrayList<Message>();
 		
 		ArrayList<Action> listeActions = new ArrayList<Action>();
 		// LISTE DES ACTIONS POSSIBLES POUR CET AGENT :
@@ -31,6 +31,7 @@ public class Philosophe extends Agent {
 		listeActions.add(new PrendreFourchettes());
 		listeActions.add(new Manger());
 		listeActions.add(new FinirManger());
+		listeActions.add(new Faim());
 		listeActions.add(new Famine());
 		//
 		this.actions = listeActions;
@@ -49,6 +50,30 @@ public class Philosophe extends Agent {
 	public boolean regarderDroite(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
 		return fourch.getDispo((this.ID+1) % (this.tab.getEffectif()));
+	}
+	
+	// Retourne le contenu du premier message de la boite aux lettres.
+	// En effet, au vu des messages de notre système, on considère que le philosophe ne lit qu'un seul message,
+	// le dernier qu'il a reçu, et qu'il n'a pas besoin de connaitre le destinataire de celui-ci.
+	public String contenuMess(){
+		if (BAL.isEmpty()) {
+			return "";
+		}
+		else {
+			return BAL.get(BAL.size()-1).getContenu();
+		}
+	}
+	
+	// Envoie un message aux deux voisins leur demandant leurs fourchettes (cas de Famine)
+	
+	public void demanderVoisinsFourchettes(){
+		Message mess1 = new Message((this.ID+1) % (this.tab.getEffectif()), this.ID, "Help");
+		tab.send(mess1);
+		
+		// je rajoute l'effectif total à ID-1 car dans le cas ID=0 java n'aime pas faire du modulo
+		// sur des nombres négatifs. (et ça ne change rien au résultat)
+		Message mess2 = new Message((this.ID-1+this.tab.getEffectif()) % (this.tab.getEffectif()), this.ID, "Help");
+		tab.send(mess2);
 	}
 	
 	// Prend les fourchettes
@@ -131,6 +156,12 @@ public class Philosophe extends Agent {
 		return tab.getSeuilFaim();
 	}
 	
+	// Récupère le seuil de famine du système
+	
+	public int getSeuilFamine() {
+		return tab.getSeuilFamine();
+	}
+	
 	// Récupère le delta faim en train de penser
 
 	public int getDeltaFPenser() {
@@ -145,8 +176,8 @@ public class Philosophe extends Agent {
 	
 	// Récupère le delta faim en famine
 	
-	public int getDeltaFFamine() {
-		return tab.getDeltaFFamine();
+	public int getDeltaFFaim() {
+		return tab.getDeltaFFaim();
 	}
 	
 	

@@ -10,21 +10,23 @@ public class Table extends Environnement {
 
 	protected int effectif;
 	protected int seuilFaim;
+	protected int seuilFamine;
 	protected int deltaFPenser;
 	protected int deltaFManger;
-	protected int deltaFFamine;
+	protected int deltaFFaim;
 	protected int compteurFamine;
 	protected int compteurPensee;
 	
 	protected int tours = 0;
 	
-	public Table(int effectif, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine){
-		
+	public Table(int effectif, int seuilFaim, int seuilFamine, int deltaFPenser, int deltaFManger, int deltaFFaim){
+
 		this.effectif = effectif;
 		this.seuilFaim = seuilFaim;
+		this.seuilFamine = seuilFamine;
 		this.deltaFPenser = deltaFPenser;
 		this.deltaFManger = deltaFManger;
-		this.deltaFFamine = deltaFFamine;
+		this.deltaFFaim = deltaFFaim;
 		
 		// Création de la liste des philosophes (agents) présents autour de la table (environnement)
 		
@@ -67,7 +69,12 @@ public class Table extends Environnement {
 	public int getSeuilFaim() {
 		return seuilFaim;
 	}
-
+	
+	// Récupère le seuil de famine
+	
+	public int getSeuilFamine() {
+		return seuilFamine;
+	}
 
 	// Récupère le delta faim en train de penser
 	
@@ -83,8 +90,8 @@ public class Table extends Environnement {
 
 	// Récupère le delta faim en famine
 	
-	public int getDeltaFFamine() {
-		return deltaFFamine;
+	public int getDeltaFFaim() {
+		return deltaFFaim;
 	}
 
 	// Récupère le nombre de philosophes
