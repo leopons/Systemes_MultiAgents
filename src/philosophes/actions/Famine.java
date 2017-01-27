@@ -22,7 +22,7 @@ public class Famine extends Action {
 		phil.setFaim(phil.getFaim()+phil.getDeltaFFaim());
 		phil.incrementFamine();
 		phil.demanderVoisinsFourchettes();
-		System.out.println("Le philosophe #" + phil.getID() + " est en famine, il demande à ses voisins de lacher les fourchettes.");
+		System.out.println("Le philosophe #" + phil.getID() + " est en famine, il demande à ses voisins de lâcher leurs fourchettes.");
 		System.out.println("Faim : " + phil.getFaim());
 	}
 
