@@ -2,6 +2,9 @@ package philosophes.actions;
 import philosophes.*;
 import plateforme.*;
 
+// Action d'un philosophe se mettant en famine (ne pense pas et ne mange pas)
+
+
 public class Famine extends Action {
 
 	public boolean check_conditions(Agent agent) {

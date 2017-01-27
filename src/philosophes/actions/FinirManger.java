@@ -2,6 +2,8 @@ package philosophes.actions;
 import philosophes.*;
 import plateforme.*;
 
+// Action d'un philosophe ayant fini de manger (seuil de faim dépassé, pose les fourchettes)
+
 public class FinirManger extends Action {
 
 	public boolean check_conditions(Agent agent) {

@@ -1,5 +1,8 @@
 package philosophes.actions;
 import philosophes.*;
+
+// Action d'un philosophe en train de manger
+
 import plateforme.*;
 
 public class Manger extends Action {

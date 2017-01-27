@@ -2,6 +2,8 @@ package philosophes.actions;
 import philosophes.*;
 import plateforme.*;
 
+// Action d'un philosophe en train de penser
+
 public class Penser extends Action {
 
 	public boolean check_conditions(Agent agent) {
