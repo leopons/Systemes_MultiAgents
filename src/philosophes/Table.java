@@ -58,7 +58,7 @@ public class Table extends Environnement {
 		fwp.write(tours+",");
 		for (int i = 0; i < agents.size(); i++){
 			Philosophe phil = (Philosophe) agents.get(i);
-			fwp.write(phil.getFaim()+","+phil.getPensee()+",");
+			fwp.write(phil.getFaim()+","+phil.getPensee()+","+phil.getFamine()+",");
 		}
 		fwp.write("\n");
 		tours++;

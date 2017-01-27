@@ -138,6 +138,12 @@ public class Philosophe extends Agent {
 		this.faim = faim;
 	}
 	
+	// Vérifie le compteur de famine du philosophe
+	
+	public int getFamine() {
+		return famine;
+	}
+	
 	// Vérifie le compteur de pensée du philosophe
 	
 	public int getPensee() {

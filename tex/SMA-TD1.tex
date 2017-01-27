@@ -1,0 +1,227 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Sectioned Essay
+% LaTeX Template
+% Version 1.0 (3/8/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original Author:
+% Nicolas Diaz (nsdiaz@uc.cl) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+
+\usepackage[a4paper,left=3cm,right=3cm]{geometry}
+
+\usepackage{indentfirst}
+
+\usepackage{enumerate}
+
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+
+
+\renewcommand{\thesection}{\Roman{section}}
+\usepackage{titlesec}
+%\titlespacing\section{0pt}{20pt plus 4pt minus 2pt}{-5pt plus 2pt minus 2pt}
+
+\usepackage{listings}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\lstset{
+language=Java,
+basicstyle=\normalsize, % ou \c ca==> basicstyle=\scriptsize,
+upquote=true,
+aboveskip={1.2\baselineskip},
+columns=fullflexible,
+showstringspaces=false,
+extendedchars=true,
+breaklines=true,
+showtabs=false,
+showspaces=false,
+showstringspaces=false,
+identifierstyle=\ttfamily,
+keywordstyle=\color[rgb]{0,0,1},
+commentstyle=\color[rgb]{0.133,0.545,0.133},
+stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+\lstset{% This applies to ALL lstlisting
+    backgroundcolor=\color{yellow!10},%
+    numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt,%
+    }%
+
+% Applies only when you use it
+\lstdefinestyle{MyLang}{
+    basicstyle=\small\ttfamily\color{magenta},%
+    breaklines=true,%                                      allow line breaks
+    moredelim=[s][\color{green!50!black}\ttfamily]{'}{'},% single quotes in green
+    moredelim=*[s][\color{black}\ttfamily]{options}{\}},%  options in black (until trailing })
+    commentstyle={\color{gray}\itshape},%                  gray italics for comments
+    morecomment=[l]{//},%                                  define // comment
+    emph={%
+        STRING%                                            literal strings listed here
+        },emphstyle={\color{blue}\ttfamily},%              and formatted in blue
+    alsoletter={:,|,;},%
+    morekeywords={:,|,;},%                                 define the special characters
+    keywordstyle={\color{black}},%                         and format them in black
+}
+
+\lstdefinestyle{Pyth}{
+	language=Python
+}
+
+
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{50pt} % Some vertical space between the title and author name
+
+{\large\@author} % Author name
+\\\@date % Date
+
+\vspace{-20pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Introduction aux Systèmes Multi-Agents}\\ % Title
+Le Dîner des Philosophes} % Subtitle
+
+\author{\textsc{Fran\c cois Hernandez - L\'eo Pons} % Author
+\\{\textit{CentraleSup\'elec}}} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\pagebreak
+\tableofcontents
+
+\pagebreak
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT AND KEYWORDS
+%----------------------------------------------------------------------------------------
+
+%\renewcommand{\abstractname}{Summary} % Uncomment to change the name of the abstract to something else
+
+
+
+\vspace{30pt} % Some vertical space between the abstract and first section
+
+%----------------------------------------------------------------------------------------
+%	ESSAY BODY
+%----------------------------------------------------------------------------------------
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+Ce TD a pour objectif de construire une plateforme générique permettant de représenter et simuler des systèmes multi-agents de différentes natures. Un premier SMA simulé sera celui du dîner des philosophes.\\
+
+Le problème des philosophes est défini de la manière suivante (Wikipedia).\\
+
+La situation est la suivante :
+\begin{itemize}
+\item cinq philosophes (initialement mais il peut y en avoir beaucoup plus) se trouvent autour d'une table ;
+\item chacun des philosophes a devant lui un plat de spaghetti ;
+\item à gauche de chaque plat de spaghetti se trouve une fourchette.
+\end{itemize}
+
+Un philosophe n'a que trois états possibles :
+
+\begin{itemize}
+\item penser pendant un temps indéterminé ;
+\item être affamé (pendant un temps déterminé et fini sinon il y a famine) ;
+\item manger pendant un temps déterminé et fini.
+\end{itemize}
+
+Des contraintes extérieures s'imposent à cette situation :
+
+\begin{itemize}
+\item quand un philosophe a faim, il va se mettre dans l'état "affamé" et attendre que les fourchettes soient libres ;
+\item pour manger, un philosophe a besoin de deux fourchettes : celle qui se trouve à gauche de sa propre assiette, et celle qui se trouve à droite (c'est-à-dire les deux fourchettes qui entourent sa propre assiette) ;
+\item si un philosophe n'arrive pas à s'emparer d'une fourchette, il reste affamé pendant un temps déterminé, en attendant de renouveler sa tentative.
+\end{itemize}
+
+Le problème consiste à trouver un ordonnancement des philosophes tel qu'ils puissent tous manger, chacun à leur tour.
+
+%------------------------------------------------
+\pagebreak
+\section{Plateforme}
+
+Dans un premier temps, nous créons un package 'plateforme' contenant les éléments principaux de la représentation générique d'un SMA.\\
+
+Celui-ci contient les classes suivantes :
+
+\begin{itemize}
+\item \texttt{Agent} : représente chaque agent du système, lié à un \texttt{Environnement} et contenant des \texttt{Donnee} et \texttt{Action} ;
+\item \texttt{Environnement} : représentant l'environnement dans lequel évoluent les agents, contenant des \texttt{Donnee} et une liste d'agents \texttt{Agent} ;
+\item \texttt{Donnee} : classe générique représentant les différentes données d'un problème ;
+\item \texttt{Action} : classe abstraite destinée à représenter les différentes actions possibles, chaque action sera une sous-classe de celle-ci.
+\end{itemize}
+
+
+%------------------------------------------------
+\pagebreak
+
+\section{Problème des philosophes}
+
+Afin d'implémenter le problème des philosophes, nous créons un nouveau package 'philosophes' contenant différentes classes héritant des classes génériques de la plateforme, ainsi que de nouvelles destinées à représenter d'autres aspects spécifiques au problème.\\
+
+Les classes héritant de la plateforme sont les suivantes :
+
+\begin{itemize}
+\item \texttt{Philosophe}, héritant de la classe \texttt{Agent} ;
+\item \texttt{Table}, héritant de la classe \texttt{Environnement} ;
+\item \texttt{philosophes.actions}, package de classes héritant de la classe \texttt{Action}.
+\end{itemize}
+
+Les classes supplémentaires sont les suivantes :
+
+\begin{itemize}
+\item \texttt{Fourchettes}, contenant la représentation de l'état des N fourchettes de l'environnement ;
+\item \texttt{Etat}, type énuméré représentant l'état d'un \texttt{Philosophe} ;
+\item \texttt{main}, permettant de faire tourner le programme.
+\end{itemize}
+
+
+
+
+%------------------------------------------------
+
+
+\section*{Tests et conclusion}
+\addcontentsline{toc}{section}{Tests et conclusion}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
