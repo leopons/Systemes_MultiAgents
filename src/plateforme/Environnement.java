@@ -32,18 +32,18 @@ public abstract class Environnement {
 	public void run() throws IOException{
 		
 		// EXPORT DANS DES FICHIERS CSV
-		fwt = new FileWriter("philosophes.csv");
+		fwt = new FileWriter("export/philosophes.csv");
 		fwt.write("Tour, Faim, Pensee"+"\n");
 		fw = new FileWriter[agents.size()];
 		for (int i = 0; i < agents.size(); i++){
-			fw[i] = new FileWriter("philosophes"+i+".csv");
+			fw[i] = new FileWriter("export/philosophes"+i+".csv");
 			fw[i].write("Tour, Faim, Pensee"+"\n");
 		}
 		
-		fwp = new FileWriter("philosophes_all.csv");
+		fwp = new FileWriter("export/philosophes_all.csv");
 		fwp.write("Tour,");
 		for (int i = 0; i < agents.size(); i++){
-			fwp.write("Faim"+i+","+"Pensee"+i+",");
+			fwp.write("Faim"+i+","+"Pensee"+i+","+"Famine"+i+",");
 		}
 		fwp.write("\n");
 		
