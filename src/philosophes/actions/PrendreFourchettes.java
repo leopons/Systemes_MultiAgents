@@ -2,6 +2,8 @@ package philosophes.actions;
 import philosophes.*;
 import plateforme.*;
 
+// Action d'un philosophe prenant les (deux) fourchettes
+
 public class PrendreFourchettes extends Action {
 
 	public boolean check_conditions(Agent agent) {
