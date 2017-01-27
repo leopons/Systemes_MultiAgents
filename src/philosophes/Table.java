@@ -1,7 +1,10 @@
 package philosophes;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import plateforme.*;
+
 
 public class Table extends Environnement {
 
@@ -12,6 +15,8 @@ public class Table extends Environnement {
 	protected int deltaFFamine;
 	protected int compteurFamine;
 	protected int compteurPensee;
+	
+	protected int tours = 0;
 	
 	public Table(int effectif, int seuilFaim, int deltaFPenser, int deltaFManger, int deltaFFamine){
 		
@@ -37,8 +42,24 @@ public class Table extends Environnement {
 
 	// Affiche la famine et la pensée dans la console, sera appelée à chaque tour
 	
-	public void bilan(){
+	public void bilan() throws IOException{
 		System.out.println("BILAN : Famine Totale = " + compteurFamine + ", Pensée Totale = " + compteurPensee);
+		
+		// EXPORT DANS DES FICHIERS CSV
+		fwt.write(tours+","+compteurFamine+","+compteurPensee+"\n");
+		fwt.flush();
+		for (int i = 0; i < agents.size(); i++){
+			Philosophe phil = (Philosophe) agents.get(i);
+			fw[i].write(tours+","+phil.getFaim()+","+phil.getPensee()+"\n");
+		}
+		
+		fwp.write(tours+",");
+		for (int i = 0; i < agents.size(); i++){
+			Philosophe phil = (Philosophe) agents.get(i);
+			fwp.write(phil.getFaim()+","+phil.getPensee()+",");
+		}
+		fwp.write("\n");
+		tours++;
 	}
 	
 	// Récupère le seuil de faim
