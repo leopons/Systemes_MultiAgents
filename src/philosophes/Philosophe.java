@@ -69,6 +69,16 @@ public class Philosophe extends Agent {
 		this.fourchettes = false;
 	}
 
+	public void incrementFamine(){
+		this.famine ++;
+		tab.setCompteurFamine(tab.getCompteurFamine()+1);
+	}
+	
+	public void incrementPensee(){
+		this.pensee ++;
+		tab.setCompteurPensee(tab.getCompteurPensee()+1);
+	}
+
 	// Récupère les données de la table (environnement)
 	
 	public Table getTab() {

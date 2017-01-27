@@ -11,11 +11,14 @@ public class Environnement {
 		return donnees;
 	}
 	
+	public void bilan(){}
+	
 	public void run(){
 		while (true) {
 			for (Agent ag : agents){
 				ag.boucle_procedurale();
 			}
+				this.bilan();
 		}
 	}
 	

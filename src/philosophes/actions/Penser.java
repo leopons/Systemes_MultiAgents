@@ -16,7 +16,7 @@ public class Penser extends Action {
 	public void effectuer(Agent agent) {
 		Philosophe phil = (Philosophe) agent;
 		// CONSEQUENCES :
-		phil.setPensee(phil.getPensee()+1);
+		phil.incrementPensee();
 		phil.setFaim(phil.getFaim()+phil.getDeltaFPenser());
 		System.out.println("Le philosophe #" + phil.getID() + " pense.");
 		System.out.println("Faim : " + phil.getFaim());
