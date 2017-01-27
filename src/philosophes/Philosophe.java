@@ -69,10 +69,14 @@ public class Philosophe extends Agent {
 		this.fourchettes = false;
 	}
 
+	// Incrémente le compteur de famine
+	
 	public void incrementFamine(){
 		this.famine ++;
 		tab.setCompteurFamine(tab.getCompteurFamine()+1);
 	}
+	
+	// Incrémente le compteur de pensée
 	
 	public void incrementPensee(){
 		this.pensee ++;
@@ -163,19 +167,19 @@ public class Philosophe extends Agent {
 		return tab.getSeuilFaim();
 	}
 	
-	// Récupère le delta de pensée
+	// Récupère le delta faim en train de penser
 
 	public int getDeltaFPenser() {
 		return tab.getDeltaFPenser();
 	}
 	
-	// Récupère le delta de faim
+	// Récupère le delta faim en train de manger
 
 	public int getDeltaFManger() {
 		return tab.getDeltaFManger();
 	}
 	
-	// Récupère le delta de famine
+	// Récupère le delta faim en famine
 	
 	public int getDeltaFFamine() {
 		return tab.getDeltaFFamine();
