@@ -48,7 +48,7 @@ public abstract class Environnement {
 		fwp.write("\n");
 		
 		int tour = 0;
-		while (tour<1000) {
+		while (tour<10000) {
 			for (Agent ag : agents){
 				ag.boucle_procedurale();
 			}
