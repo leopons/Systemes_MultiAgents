@@ -51,7 +51,7 @@ public class Philosophe extends Agent {
 		return fourch.getDispo((this.ID+1) % (this.tab.getEffectif()));
 	}
 	
-	// Prend les fourchettes si elles sont disponibles
+	// Prend les fourchettes
 	
 	public void prendreFourchettes(){
 		Fourchettes fourch = (Fourchettes) this.tab.getDonnees().get(0);
@@ -77,18 +77,6 @@ public class Philosophe extends Agent {
 	public void incrementPensee(){
 		this.pensee ++;
 		tab.setCompteurPensee(tab.getCompteurPensee()+1);
-	}
-
-	// Récupère les données de la table (environnement)
-	
-	public Table getTab() {
-		return tab;
-	}
-	
-	// Modifie les données de la table (environnement)
-
-	public void setTab(Table tab) {
-		this.tab = tab;
 	}
 
 	// Vérifie si le philosophe a les fourchettes
@@ -121,43 +109,13 @@ public class Philosophe extends Agent {
 		this.faim = faim;
 	}
 	
-	// Vérifie le compteur de pensée du philosophe
-
-	public int getPensee() {
-		return pensee;
-	}
-
-	// Modifie le compteur de pensée du philosophe
-	
-	public void setPensee(int pensee) {
-		this.pensee = pensee;
-	}
-		
-	// Vérifie le compteur de famine du philosophe
-	
-	public int getFamine() {
-		return famine;
-	}
-
-	// Modifie le compteur de famine du philosophe
-	
-	public void setFamine(int famine) {
-		this.famine = famine;
-	}
-	
 	// Vérifie l'ID du philosophe
 	
 	public int getID() {
 		return ID;
 	}
 
-	// Modifie l'ID du philosophe
-	
-	public void setID(int iD) {
-		ID = iD;
-	}
-
-	// Récupère le seuil de faim du philosophe
+	// Récupère le seuil de faim du système
 	
 	public int getSeuilFaim() {
 		return tab.getSeuilFaim();
