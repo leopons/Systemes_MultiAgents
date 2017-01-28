@@ -31,6 +31,11 @@
 \usepackage{graphicx} % Required for including pictures
 \usepackage{wrapfig} % Allows in-line images
 
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{pgf}
+\usetikzlibrary{arrows}
+\usepackage{tkz-graph}
 
 \renewcommand{\thesection}{\Roman{section}}
 \usepackage{titlesec}
@@ -237,6 +242,23 @@ Comme précisé en introduction, le problème du dîner des philosophes peut être co
 \subsection{Machine à états}
 
 Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, selon l'état du philosophe et l'observation des données, une action est exécutée. Pour plus de clarté, nous avons représenté l'ensemble des actions implémentées sur une machine à états.\\
+
+\begin{center}
+\begin{tikzpicture}
+% style des noeuds
+\tikzstyle{etat}=[rectangle,minimum height=1.5cm,minimum width=6cm,draw]
+% style des fl\`eches
+\tikzstyle{lien}=[->,>=stealth',thick,rounded corners=4pt]
+% placement des noeuds
+\node[etat] (penser) at (0,4.5) {en\_train\_de\_penser};
+\node[etat] (manger) at (9,0) {en\_train\_de\_manger};
+\node[etat] (fourchettes) at (9,9) {en\_attente\_fourchettes};
+% placement des fl\`eches
+\draw[lien] (manger)--(fourchettes)node[midway,fill=white]{test};
+\draw[lien] (penser)--(manger)node[midway,fill=white]{test};
+\end{tikzpicture}
+\end{center}
+
 
 \subsection{Rôle des paramètres}
 
