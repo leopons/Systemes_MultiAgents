@@ -180,7 +180,7 @@ Le problème consiste à définir le comportement des philosophes tel qu'ils puisse
 
 Dans un premier temps, nous créons un package 'plateforme' contenant les éléments principaux de la représentation générique d'un SMA.\\
 
-Notre plateforme fonctionne de manière synchrone : Le premier agent observe son environnement et effectue une action, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
+Notre plateforme fonctionne de manière synchrone : Le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
 
 Notre package contient les classes suivantes :
 
@@ -188,7 +188,7 @@ Notre package contient les classes suivantes :
 \item \texttt{Agent} : Représente chaque agent du système, liés à un \texttt{Environnement}, à une liste d'actions possibles et à une boîte aux lettres (pour la réception des messages, détaillée plus loin).
 \item \texttt{Environnement} : Représente l'environnement dans lequel évoluent les agents, contenant des \texttt{Donnee} et une liste d'agents \texttt{Agent}.
 \item \texttt{Donnee} : Classe générique représentant les différentes données d'un problème.
-\item \texttt{Action} : Classe abstraite destinée à représenter les différentes actions possibles, chaque action sera une sous-classe de celle-ci.
+\item \texttt{Action} : Classe abstraite destinée à représenter les différentes actions possibles, chaque action sera une sous-classe de celle-ci. Deux méthodes cruciales définissent une action : \texttt{check\_conditions} qui évalue les critères d'exécution de l'action, et \texttt{effectuer} qui exécute l'action proprement dit et modifie donc les données affectées par cette action.
 \item \texttt{Message} : Les messages seront décrits dans un deuxième temps. Ils permettent la communication entre les agents.
 \end{itemize}
 
@@ -198,24 +198,24 @@ Vous trouverez dans le code Java des commentaires détaillant l'implémentation de
 %------------------------------------------------
 \pagebreak
 
-\section{Problème des philosophes}
+\section{Application au problème du dîner des philosophes}
 
 Afin d'implémenter le problème des philosophes, nous créons un nouveau package 'philosophes' contenant différentes classes héritant des classes génériques de la plateforme, ainsi que de nouvelles destinées à représenter d'autres aspects spécifiques au problème.\\
 
 Les classes héritant de la plateforme sont les suivantes :
 
 \begin{itemize}
-\item \texttt{Philosophe}, héritant de la classe \texttt{Agent} ;
-\item \texttt{Table}, héritant de la classe \texttt{Environnement} ;
-\item \texttt{philosophes.actions}, package de classes héritant de la classe \texttt{Action}.
+\item \texttt{Philosophe}, héritant de la classe \texttt{Agent}.
+\item \texttt{Table}, héritant de la classe \texttt{Environnement}.
+\item \texttt{philosophes.actions}, package de classes héritant de la classe \texttt{Action}. Chacune de ces classes définit une action exécutable par les philosophes.
+\item \texttt{Fourchettes}, héritant de la classe \texttt{Donnee} et contenant la représentation de l'état des N fourchettes de l'environnement.
 \end{itemize}
 
 Les classes supplémentaires sont les suivantes :
 
 \begin{itemize}
-\item \texttt{Fourchettes}, contenant la représentation de l'état des N fourchettes de l'environnement ;
-\item \texttt{Etat}, type énuméré représentant l'état d'un \texttt{Philosophe} ;
-\item \texttt{main}, permettant de faire tourner le programme.
+\item \texttt{Etat}, type énuméré représentant l'état d'un \texttt{Philosophe}.
+\item \texttt{main}, permettant de faire tourner le système.
 \end{itemize}
 
 
