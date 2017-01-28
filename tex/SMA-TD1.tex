@@ -168,26 +168,31 @@ Un philosophe a un certain nombre d'états possibles, par exemple :
 Des contraintes extérieures s'imposent à cette situation :
 
 \begin{itemize}
-\item Quand un philosophe a faim, il attend que les fourchettes soient libres.
 \item Pour manger, un philosophe a besoin de deux fourchettes : celle qui se trouve à gauche de sa propre assiette, et celle qui se trouve à droite (c'est-à-dire les deux fourchettes qui entourent sa propre assiette).
+\item Quand un philosophe a faim, il attend que les fourchettes soient libres.
 \end{itemize}
 
 Le problème consiste à définir le comportement des philosophes tel qu'ils puissent tous manger, chacun à leur tour.
 
 %------------------------------------------------
 \pagebreak
-\section{Plateforme}
+\section{Plateforme SMA Synchrone}
 
 Dans un premier temps, nous créons un package 'plateforme' contenant les éléments principaux de la représentation générique d'un SMA.\\
 
-Celui-ci contient les classes suivantes :
+Notre plateforme fonctionne de manière synchrone : Le premier agent observe son environnement et effectue une action, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
+
+Notre package contient les classes suivantes :
 
 \begin{itemize}
-\item \texttt{Agent} : représente chaque agent du système, lié à un \texttt{Environnement} et contenant des \texttt{Donnee} et \texttt{Action} ;
-\item \texttt{Environnement} : représentant l'environnement dans lequel évoluent les agents, contenant des \texttt{Donnee} et une liste d'agents \texttt{Agent} ;
-\item \texttt{Donnee} : classe générique représentant les différentes données d'un problème ;
-\item \texttt{Action} : classe abstraite destinée à représenter les différentes actions possibles, chaque action sera une sous-classe de celle-ci.
+\item \texttt{Agent} : Représente chaque agent du système, liés à un \texttt{Environnement}, à une liste d'actions possibles et à une boîte aux lettres (pour la réception des messages, détaillée plus loin).
+\item \texttt{Environnement} : Représente l'environnement dans lequel évoluent les agents, contenant des \texttt{Donnee} et une liste d'agents \texttt{Agent}.
+\item \texttt{Donnee} : Classe générique représentant les différentes données d'un problème.
+\item \texttt{Action} : Classe abstraite destinée à représenter les différentes actions possibles, chaque action sera une sous-classe de celle-ci.
+\item \texttt{Message} : Les messages seront décrits dans un deuxième temps. Ils permettent la communication entre les agents.
 \end{itemize}
+
+Vous trouverez dans le code Java des commentaires détaillant l'implémentation des différentes classes et de leurs méthodes.\\
 
 
 %------------------------------------------------
