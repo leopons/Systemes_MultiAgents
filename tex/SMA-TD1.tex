@@ -200,6 +200,8 @@ Vous trouverez dans le code Java des commentaires détaillant l'implémentation de
 
 \section{Application au problème du dîner des philosophes}
 
+\subsection{Implémentation Générale}
+
 Afin d'implémenter le problème des philosophes, nous créons un nouveau package 'philosophes' contenant différentes classes héritant des classes génériques de la plateforme, ainsi que de nouvelles destinées à représenter d'autres aspects spécifiques au problème.\\
 
 Les classes héritant de la plateforme sont les suivantes :
@@ -218,12 +220,45 @@ Les classes supplémentaires sont les suivantes :
 \item \texttt{main}, permettant de faire tourner le système.
 \end{itemize}
 
+Comme précisé en introduction, le problème du dîner des philosophes peut être construit de différentes manières. Voici quelques points de comportement que nous avons décidé d'adopter :
 
+\begin{itemize}
+\item Le nombre de philosophes est défini par l'attribut \texttt{effectif} de la \texttt{Table}.
+\item Les philosophes commencent tous avec un compteur de faim \texttt{effectif} à 0, et leur état est \texttt{en\_train\_de\_penser}.
+\item Quand un philosophe pense un compteur de mesure \texttt{compteurPensee} est incrémenté à chaque tour au niveau de la \texttt{Table}.
+\item Le fait de penser donne faim aux philosophes, ce qui est quantifié par l'attribut \texttt{deltaFPenser} de la \texttt{Table}.
+\item Passé un certain seuil de faim défini par l'attribut \texttt{seuilFaim} de la \texttt{Table}, le philosophe ne peut plus penser et a faim, il essaie alors de ramasser ses fourchettes pour manger.
+\item Lorsqu'un philosophe a faim et qu'il ne mange pas, sa faim s'aggrave, ce qui est quantifié par l'attribut \texttt{deltaFFaim} de la \texttt{Table}.
+\item Passé un certain seuil de faim défini par l'attribut \texttt{seuilFamine} de la \texttt{Table}, le philosophe est en état critique de famine : un compteur de mesure \texttt{compteurFamine} est incrémenté à chaque tour au niveau de la \texttt{Table}.
+\item Lorsqu'un philosophe mange, sa faim diminue, ce qui est quantifié par l'attribut \texttt{deltaFManger} de la \texttt{Table}.
+\item Passé le seuil de satiété défini par défaut à 0, le philosophe s'arrête de manger et peut recommencer à penser.
+\end{itemize}
+
+\subsection{Machine à états}
+
+Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, selon l'état du philosophe et l'observation des données, une action est exécutée. Pour plus de clarté, nous avons représenté l'ensemble des actions implémentées sur une machine à états.\\
+
+\subsection{Rôle des paramètres}
+
+Bien évidemment, le comportement du système est largement affecté par le choix des constantes du système. Par exemple, un choix de \texttt{deltaFManger} démesurément grand (en valeur absolue) par rapport à \texttt{deltaFPenser} et \texttt{deltaFFaim} a pour conséquence de simplifier grandement le problème : chaque philosophe peut passer son temps à penser et ne manger qu'une fois de temps pour rattraper son retard. Les fourchettes sont alors presque tout le temps disponible.\\
+L'intérêt bien sûr n'est pas de regarder ses philosophes manger mais bien de définir des constantes équilibrées pour étudier un système nuancé. Après quelques essais, nous avons décidé de travailler dans un premier temps avec xxxxx var. On remarquera que le choix de \texttt{deltaFFamine} ne joue que sur la variable de mesure \texttt{compteurFamine} et non sur le fonctionnement même du système.\\
+
+graphe évolution
+
+Le choix de \texttt{deltaFFamine} est donc un problème de convention. Pour le contexte donné en fig.X, on trouve par exemple xxxxx. On choisira \texttt{deltaFFamine}=60 pour les prochaines simulations.\\
+
+Le choix du nombre de philosophe est nettement plus intéressant. En effet, on remarque vite que le comportement du système est assez chaotique : les scores de famine et de pensée peuvent varier drastiquement d'une configuration à l'autre, ceci sans que l'on ai pu identifier de relation logique entre l'effectif et ces scores. Voir figure XXX\\
+
+graphe nb de philosophes
+
+Ce comportement est problématique. Dans le cas où l'on a 8 philosophes, le comportement du système est désastreux. Il faut donc mettre en place une solution pour régulariser ce genre de cas, et pourvoir travailler avec un système moins imprévisible.\\
+
+\subsection{Ajout des messages}
 
 
 %------------------------------------------------
 
-
+\pagebreak
 \section*{Tests et conclusion}
 \addcontentsline{toc}{section}{Tests et conclusion}
 
