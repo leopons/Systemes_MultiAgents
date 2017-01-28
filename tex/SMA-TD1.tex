@@ -36,6 +36,7 @@
 \usepackage{pgf}
 \usetikzlibrary{arrows}
 \usepackage{tkz-graph}
+\usetikzlibrary{shapes.multipart}
 
 \renewcommand{\thesection}{\Roman{section}}
 \usepackage{titlesec}
@@ -241,7 +242,7 @@ Comme précisé en introduction, le problème du dîner des philosophes peut être co
 
 \subsection{Machine à états}
 
-Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, selon l'état du philosophe et l'observation des données, une action est exécutée. Pour plus de clarté, nous avons représenté l'ensemble des actions implémentées sur une machine à états.\\
+Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, selon l'état du philosophe et l'observation des données, une action est exécutée. Pour plus de clarté, nous avons représenté l'ensemble des actions implémentées sur une machine à états simplifiée. Les messages ne sont pas encore pris en compte.\\
 
 \begin{center}
 \begin{tikzpicture}
@@ -254,8 +255,12 @@ Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, 
 \node[etat] (manger) at (9,0) {en\_train\_de\_manger};
 \node[etat] (fourchettes) at (9,9) {en\_attente\_fourchettes};
 % placement des fl\`eches
-\draw[lien] (manger)--(fourchettes)node[midway,fill=white]{test};
-\draw[lien] (penser)--(manger)node[midway,fill=white]{test};
+\draw[lien] (fourchettes)edge[loop above]node[midway,fill=white]{\begin{tabular}{c}Faim/Famine \\ !fourchettes \\ faim += deltaFFaim\end{tabular}}();
+\draw[lien] (manger)edge[loop below]node[midway,fill=white]{\begin{tabular}{c}Manger \\ faim > 0 \\ faim += deltaFManger\end{tabular}}();
+\draw[lien] (penser)edge[loop above]node[midway,fill=white]{\begin{tabular}{c}Penser \\ faim < seuilFaim \\ faim += deltaFPenser\end{tabular}}();
+\draw[lien] (manger)--(penser)node[midway,fill=white]{\begin{tabular}{c}FinirManger \\ faim <= 0 \\ / \end{tabular}};
+\draw[lien] (penser)--(fourchettes)node[midway,fill=white]{\begin{tabular}{c}FinirPenser \\ faim >= seuilFaim \\ / \end{tabular}};
+\draw[lien] (fourchettes)--(manger)node[midway,fill=white]{\begin{tabular}{c}PrendreFourchettes \\ fourchettes \\ fourchettes=false \end{tabular}};
 \end{tikzpicture}
 \end{center}
 
