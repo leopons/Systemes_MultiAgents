@@ -255,6 +255,18 @@ Ce comportement est problématique. Dans le cas où l'on a 8 philosophes, le compo
 
 \subsection{Ajout des messages}
 
+Le problème de beaucoup de configurations malheureuses, c'est que certains philosophes s'accaparent les couverts pendant que d'autres non jamais l'occasion de les ramasser. On peut essayer d'éviter cela en mettant en place un système de communication entre agents.\\
+
+La communication entre agents passe par la classe \texttt{Message}. Un agent peut envoyer un message à un autre agent en créant une instance de \texttt{Message} spécifiant son identifiant, l'identifiant du destinataire, et le contenu du message. L'envoi est effectué via l'objet d'environnement avec la méthode \texttt{send} qui redistribue le message au destinataire.\\
+
+Le message est alors stocké dans la boite aux lettres du destinataire dans l'attente d'être traité. Les messages sont ensuite régulièrement supprimés (par exemple à la fin de chaque tour) pour éviter d'accumuler de vieux messages. Pour le traitement, plusieurs solutions sont envisageables au niveau de l'implémentation d'un problème particulier.\\
+
+Pour nos philosophes, nous avons décidé de mettre en place une solution simple : au début de son tour le philosophe consulte le dernier message qu'il a reçu, les autres sont ignorés. Le contenu du message intervient alors au niveau des conditions d'exécution des actions, au même titre que les autres données du système.\\
+
+Un premier type de message a été mis en place pour diminuer les scores de famine : \texttt{Help}. Cette démarche a été très fructueuse, donc nous nous sommes contentés de ce type de message dans un premier temps. Le message est émis par un philosophe lorsqu'il passe le seuil de famine, et est envoyé à ses deux voisins pour leur demander de lâcher leurs fourchettes. Ainsi, au tour suivant, le philosophe peut manger et on évite un état de famine prolongé.\\
+
+même graphe nombre de philosophes
+
 
 %------------------------------------------------
 
