@@ -186,7 +186,7 @@ Le problème consiste à définir le comportement des philosophes tel qu'ils puisse
 
 Dans un premier temps, nous créons un package 'plateforme' contenant les éléments principaux de la représentation générique d'un SMA.\\
 
-Notre plateforme fonctionne de manière synchrone : Le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
+Notre plateforme fonctionne de manière synchrone : le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
 
 Notre package contient les classes suivantes :
 
@@ -231,7 +231,7 @@ Comme précisé en introduction, le problème du dîner des philosophes peut être co
 \begin{itemize}
 \item Le nombre de philosophes est défini par l'attribut \texttt{effectif} de la \texttt{Table}.
 \item Les philosophes commencent tous avec un compteur de faim \texttt{effectif} à 0, et leur état est \texttt{en\_train\_de\_penser}.
-\item Quand un philosophe pense un compteur de mesure \texttt{compteurPensee} est incrémenté à chaque tour au niveau de la \texttt{Table}.
+\item Quand un philosophe pense, un compteur de mesure \texttt{compteurPensee} est incrémenté à chaque tour au niveau de la \texttt{Table}.
 \item Le fait de penser donne faim aux philosophes, ce qui est quantifié par l'attribut \texttt{deltaFPenser} de la \texttt{Table}.
 \item Passé un certain seuil de faim défini par l'attribut \texttt{seuilFaim} de la \texttt{Table}, le philosophe ne peut plus penser et a faim, il essaie alors de ramasser ses fourchettes pour manger.
 \item Lorsqu'un philosophe a faim et qu'il ne mange pas, sa faim s'aggrave, ce qui est quantifié par l'attribut \texttt{deltaFFaim} de la \texttt{Table}.
@@ -282,7 +282,7 @@ Ce comportement est problématique. Dans le cas où l'on a 8 philosophes, le compo
 
 \subsection{Ajout des messages}
 
-Le problème de beaucoup de configurations malheureuses, c'est que certains philosophes s'accaparent les couverts pendant que d'autres non jamais l'occasion de les ramasser. On peut essayer d'éviter cela en mettant en place un système de communication entre agents.\\
+Le problème de beaucoup de configurations malheureuses, c'est que certains philosophes s'accaparent les couverts pendant que d'autres n'ont jamais l'occasion de les récupérer. On peut essayer d'éviter cela en mettant en place un système de communication entre agents.\\
 
 La communication entre agents passe par la classe \texttt{Message}. Un agent peut envoyer un message à un autre agent en créant une instance de \texttt{Message} spécifiant son identifiant, l'identifiant du destinataire, et le contenu du message. L'envoi est effectué via l'objet d'environnement avec la méthode \texttt{send} qui redistribue le message au destinataire.\\
 
