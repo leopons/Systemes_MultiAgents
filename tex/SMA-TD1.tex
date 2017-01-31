@@ -283,7 +283,7 @@ Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, 
 
 Bien évidemment, le comportement du système est largement affecté par le choix des constantes de l'environnement. Par exemple, un choix de \texttt{deltaFManger} démesurément grand (en valeur absolue) par rapport à \texttt{deltaFPenser} et \texttt{deltaFFaim} a pour conséquence de simplifier grandement le problème : chaque philosophe peut passer son temps à penser et ne manger qu'une fois de temps pour rattraper son retard. Les fourchettes sont alors presque tout le temps disponible.\\
 
-L'intérêt bien sûr n'est pas de regarder ses philosophes manger mais bien de définir des constantes équilibrées pour étudier un système nuancé. Après quelques essais, nous avons décidé de travailler dans un premier temps avec xxxxx var. On remarquera que le choix de \texttt{deltaFFamine} ne joue que sur la variable de mesure \texttt{compteurFamine} et non sur le fonctionnement même du système.\\
+L'intérêt bien sûr n'est pas de regarder ses philosophes manger mais bien de définir des constantes équilibrées pour étudier un système nuancé. Après quelques essais, nous avons décidé de travailler dans un premier temps \texttt{seuilFaim = 10, deltaPenser = 5, deltaManger = -2, deltaFaim = 1}. On remarquera que le choix de \texttt{deltaFFamine} ne joue que sur la variable de mesure \texttt{compteurFamine} et non sur le fonctionnement même du système.\\
 
 
 \begin{figure}[!h]
@@ -295,7 +295,7 @@ L'intérêt bien sûr n'est pas de regarder ses philosophes manger mais bien de déf
 
 
 
-Le choix de \texttt{deltaFFamine} est donc un problème de convention. Pour le contexte donné en fig.X, on trouve par exemple xxxxx. On choisira \texttt{deltaFFamine}=60 pour les prochaines simulations.\\
+Le choix de \texttt{deltaFFamine} est donc un problème de convention. Pour le contexte donné établi précédemment, on trouve par exemple une famine totale accumulée sur 20 000 tours de 2662, 521, et 23 pour des valeurs respectives de \texttt{deltaFFamine} de 50, 60, et 70. On choisira \texttt{deltaFFamine}=60 pour les prochaines simulations.\\
 
 Le choix du nombre de philosophe est nettement plus intéressant. En effet, on remarque vite que le comportement du système est assez chaotique : les scores de famine et de pensée peuvent varier drastiquement d'une configuration à l'autre, ceci sans que l'on ai pu identifier de relation logique entre l'effectif et ces scores (cf. Figure 3).\\
 
