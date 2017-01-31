@@ -28,6 +28,7 @@
 \usepackage{indentfirst}
 %\usepackage[utf8]{inputenc}
 \usepackage{pgfplots}
+\usepackage{color}
 
 \usepackage{enumerate}
 
@@ -191,7 +192,7 @@ Le problème consiste à définir le comportement des philosophes tel qu'ils puisse
 
 Dans un premier temps, nous créons un package 'plateforme' contenant les éléments principaux de la représentation générique d'un SMA.\\
 
-Notre plateforme fonctionne de manière synchrone : le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
+\textcolor{red} {Notre plateforme} fonctionne de manière synchrone : le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
 
 Notre package contient les classes suivantes :
 
