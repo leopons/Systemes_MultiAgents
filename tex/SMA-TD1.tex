@@ -192,7 +192,7 @@ Le problème consiste à définir le comportement des philosophes tel qu'ils puisse
 
 Dans un premier temps, nous créons un package 'plateforme' contenant les éléments principaux de la représentation générique d'un SMA.\\
 
-\textcolor{red} {Notre plateforme} fonctionne de manière synchrone : le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
+Notre plateforme fonctionne de manière synchrone : le premier agent observe son environnement et effectue une action dont les critères d'exécution sont satisfaits par les données observées, puis c'est au tour du second et ainsi de suite. Arrivé au dernier agent, on recommence en repartant du premier.\\
 
 Notre package contient les classes suivantes :
 
@@ -257,19 +257,21 @@ Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, 
 \begin{tikzpicture}
 % style des noeuds
 \tikzstyle{etat}=[rectangle,minimum height=1.4cm,minimum width=5cm,draw]
+\tikzstyle{legende}=[rectangle,dashed,minimum height=1.4cm,minimum width=4cm,draw]
 % style des fl\`eches
 \tikzstyle{lien}=[->,>=stealth',thick,rounded corners=4pt]
 % placement des noeuds
 \node[etat] (penser) at (0,4.5) {en\_train\_de\_penser};
 \node[etat] (manger) at (9,0) {en\_train\_de\_manger};
 \node[etat] (fourchettes) at (9,9) {en\_attente\_fourchettes};
+\node[legende] (legende) at (0,0) {\begin{tabular}{c}NomAction\\ \textcolor{red}{conditions} \\ \textcolor{blue}{conséquences}\end{tabular}};
 % placement des fl\`eches
-\draw[lien] (fourchettes)edge[loop above]node[midway,fill=white]{\begin{tabular}{c}Faim/Famine \\ !fourchettes \\ faim += deltaFFaim\end{tabular}}();
-\draw[lien] (manger)edge[loop below]node[midway,fill=white]{\begin{tabular}{c}Manger \\ faim > 0 \\ faim += deltaFManger\end{tabular}}();
-\draw[lien] (penser)edge[loop above]node[midway,fill=white]{\begin{tabular}{c}Penser \\ faim < seuilFaim \\ faim += deltaFPenser\end{tabular}}();
-\draw[lien] (manger)--(penser)node[midway,fill=white]{\begin{tabular}{c}FinirManger \\ faim <= 0 \\ / \end{tabular}};
-\draw[lien] (penser)--(fourchettes)node[midway,fill=white]{\begin{tabular}{c}FinirPenser \\ faim >= seuilFaim \\ / \end{tabular}};
-\draw[lien] (fourchettes)--(manger)node[midway,fill=white]{\begin{tabular}{c}PrendreFourchettes \\ fourchettes \\ fourchettes=false \end{tabular}};
+\draw[lien] (fourchettes)edge[loop above]node[midway,fill=white]{\begin{tabular}{c}Faim/Famine \\ \textcolor{red}{! fourchettesDispo} \\ \textcolor{blue}{faim += deltaFFaim}\end{tabular}}();
+\draw[lien] (manger)edge[loop below]node[midway,fill=white]{\begin{tabular}{c}Manger \\ \textcolor{red}{faim > 0} \\ \textcolor{blue}{faim += deltaFManger}\end{tabular}}();
+\draw[lien] (penser)edge[loop above]node[midway,fill=white]{\begin{tabular}{c}Penser \\ \textcolor{red}{faim < seuilFaim} \\ \textcolor{blue}{faim += deltaFPenser}\end{tabular}}();
+\draw[lien] (manger)--(penser)node[midway,fill=white]{\begin{tabular}{c}FinirManger \\ \textcolor{red}{faim <= 0} \end{tabular}};
+\draw[lien] (penser)--(fourchettes)node[midway,fill=white]{\begin{tabular}{c}FinirPenser \\ \textcolor{red}{faim >= seuilFaim} \end{tabular}};
+\draw[lien] (fourchettes)--(manger)node[midway,fill=white]{\begin{tabular}{c}PrendreFourchettes \\ \textcolor{red}{fourchettesDispo} \\ \textcolor{blue}{fourchettesDispo=false} \end{tabular}};
 \end{tikzpicture}
 \caption{Représentation en machine à état du système}
 \end{center}
