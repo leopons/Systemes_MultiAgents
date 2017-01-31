@@ -21,9 +21,13 @@
 
 \documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
 
+\usepackage{standalone}
+
 \usepackage[a4paper,left=3cm,right=3cm]{geometry}
 
 \usepackage{indentfirst}
+%\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
 
 \usepackage{enumerate}
 
@@ -34,6 +38,7 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes}
 \usepackage{pgf}
+\usepackage{pgfplots}
 \usetikzlibrary{arrows}
 \usepackage{tkz-graph}
 \usetikzlibrary{shapes.multipart}
@@ -202,13 +207,15 @@ Vous trouverez dans le code Java des commentaires détaillant l'implémentation de
 
 
 %------------------------------------------------
-\pagebreak
+%\pagebreak
 
 \section{Application au problème du dîner des philosophes}
 
 \subsection{Implémentation Générale}
 
 Afin d'implémenter le problème des philosophes, nous créons un nouveau package 'philosophes' contenant différentes classes héritant des classes génériques de la plateforme, ainsi que de nouvelles destinées à représenter d'autres aspects spécifiques au problème.\\
+
+\pagebreak
 
 Les classes héritant de la plateforme sont les suivantes :
 
@@ -244,10 +251,11 @@ Comme précisé en introduction, le problème du dîner des philosophes peut être co
 
 Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, selon l'état du philosophe et l'observation des données, une action est exécutée. Pour plus de clarté, nous avons représenté l'ensemble des actions implémentées sur une machine à états simplifiée. Les messages ne sont pas encore pris en compte.\\
 
+\begin{figure}[!h]
 \begin{center}
 \begin{tikzpicture}
 % style des noeuds
-\tikzstyle{etat}=[rectangle,minimum height=1.5cm,minimum width=6cm,draw]
+\tikzstyle{etat}=[rectangle,minimum height=1.4cm,minimum width=5cm,draw]
 % style des fl\`eches
 \tikzstyle{lien}=[->,>=stealth',thick,rounded corners=4pt]
 % placement des noeuds
@@ -262,21 +270,54 @@ Nous avons défini quelques actions de base pour nos philosophes. À chaque tour, 
 \draw[lien] (penser)--(fourchettes)node[midway,fill=white]{\begin{tabular}{c}FinirPenser \\ faim >= seuilFaim \\ / \end{tabular}};
 \draw[lien] (fourchettes)--(manger)node[midway,fill=white]{\begin{tabular}{c}PrendreFourchettes \\ fourchettes \\ fourchettes=false \end{tabular}};
 \end{tikzpicture}
+\caption{Représentation en machine à état du système}
 \end{center}
+\end{figure}
 
+\pagebreak
 
 \subsection{Rôle des paramètres}
 
 Bien évidemment, le comportement du système est largement affecté par le choix des constantes de l'environnement. Par exemple, un choix de \texttt{deltaFManger} démesurément grand (en valeur absolue) par rapport à \texttt{deltaFPenser} et \texttt{deltaFFaim} a pour conséquence de simplifier grandement le problème : chaque philosophe peut passer son temps à penser et ne manger qu'une fois de temps pour rattraper son retard. Les fourchettes sont alors presque tout le temps disponible.\\
 L'intérêt bien sûr n'est pas de regarder ses philosophes manger mais bien de définir des constantes équilibrées pour étudier un système nuancé. Après quelques essais, nous avons décidé de travailler dans un premier temps avec xxxxx var. On remarquera que le choix de \texttt{deltaFFamine} ne joue que sur la variable de mesure \texttt{compteurFamine} et non sur le fonctionnement même du système.\\
 
-graphe évolution
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{figure_1.png}
+\caption{Évolution de la faim et de la pensée pour 9 philosophes}
+\end{center}
+\end{figure}
+
+
 
 Le choix de \texttt{deltaFFamine} est donc un problème de convention. Pour le contexte donné en fig.X, on trouve par exemple xxxxx. On choisira \texttt{deltaFFamine}=60 pour les prochaines simulations.\\
 
-Le choix du nombre de philosophe est nettement plus intéressant. En effet, on remarque vite que le comportement du système est assez chaotique : les scores de famine et de pensée peuvent varier drastiquement d'une configuration à l'autre, ceci sans que l'on ai pu identifier de relation logique entre l'effectif et ces scores. Voir figure XXX\\
+Le choix du nombre de philosophe est nettement plus intéressant. En effet, on remarque vite que le comportement du système est assez chaotique : les scores de famine et de pensée peuvent varier drastiquement d'une configuration à l'autre, ceci sans que l'on ai pu identifier de relation logique entre l'effectif et ces scores (cf. Figure 3).\\
 
-graphe nb de philosophes
+
+\begin{figure}[!h]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[grid=major,
+xlabel={Nombre de philosophes},
+ylabel={Famine et Pensée},
+legend entries={Famine, Pensée}]
+
+\addplot coordinates {(3,34736) (4,0) (5,1260) (6,0) (7,383) (8,54024) (9,521) (10,142) (11,576) (12,261) (13,432) (14,197) (15,456)};
+\addplot coordinates {(3,271) (4,7291) (5,4369) (6,8964) (7,7634) (8,14325) (9,10307) (10,12715) (11,12791) (12,14981) (13,15596) (14,17289) (15,18135)};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Famine et pensée finales en fonction du nombre de philosophes}
+\end{center}
+\end{figure}
+
+
+
+
+
 
 Ce comportement est problématique. Dans le cas où l'on a 8 philosophes, le comportement du système est désastreux. Il faut donc mettre en place une solution pour régulariser ce genre de cas, et pourvoir travailler avec un système moins imprévisible.\\
 
@@ -292,7 +333,23 @@ Pour nos philosophes, nous avons décidé de mettre en place une solution simple :
 
 Un premier type de message a été mis en place pour diminuer les scores de famine : \texttt{Help}. Cette démarche a été très fructueuse, donc nous nous sommes contentés de ce type de message dans un premier temps. Le message est émis par un philosophe lorsqu'il passe le seuil de famine, et est envoyé à ses deux voisins pour leur demander de lâcher leurs fourchettes. Ainsi, au tour suivant, le philosophe peut manger et on évite un état de famine prolongé.\\
 
-même graphe nombre de philosophes
+\begin{figure}[!h]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[grid=major,
+xlabel={Nombre de philosophes},
+ylabel={Famine et Pensée},
+legend entries={Famine, Pensée}]
+
+\addplot coordinates {(3,29430) (4,0) (5,209) (6,0) (7,121) (8,13) (9,109) (10,29) (11,89) (12,61) (13,72) (14,73) (15,84)};
+\addplot coordinates {(3,31) (4,7291) (5,4247) (6,8964) (7,7621) (8,10860) (9,10380) (10,12690) (11,13142) (12,14914) (13,15596) (14,17128) (15,18179)};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Famine et pensée finales en fonction du nombre de philosophes - avec messages}
+\end{center}
+\end{figure}
 
 
 %------------------------------------------------
