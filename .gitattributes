@@ -1,2 +1,3 @@
 src/* linguist-language=Java
 tex/* linguist-vendored
+README.md linguist-language=tex
